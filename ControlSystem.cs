@@ -2,11 +2,15 @@ using System;
 using Crestron.SimplSharp;
 using Crestron.SimplSharpPro;
 using Crestron.SimplSharpPro.CrestronThread;
+using Crestron.SimplSharpPro.DM.Streaming;
 
 namespace NvxSspTesting
 {
     public class ControlSystem : CrestronControlSystem
     {
+        private DmNvx350 _tx;
+        private DmNvx350 _rx;
+
         public ControlSystem()
             : base()
         {
@@ -24,7 +28,11 @@ namespace NvxSspTesting
         {
             try
             {
+                _tx = new DmNvx350(0x30, this);
+                _tx.Register();
 
+                _rx = new DmNvx350(0x31, this);
+                _rx.Register();
             }
             catch (Exception e)
             {
