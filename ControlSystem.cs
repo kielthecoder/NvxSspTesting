@@ -49,7 +49,17 @@ namespace NvxSspTesting
             {
                 var nvxDevice = dev as DmNvx350;
 
-                CrestronConsole.PrintLine("{0} is ONLINE", nvxDevice.Name);
+                CrestronConsole.PrintLine("{0} is ONLINE", nvxDevice.EndpointName);
+
+                switch (nvxDevice.Control.DeviceMode)
+                {
+                    case eDeviceMode.Transmitter:
+                        CrestronConsole.PrintLine("  device is TRANSMITTER");
+                        break;
+                    case eDeviceMode.Receiver:
+                        CrestronConsole.PrintLine("  device is RECEIVER");
+                        break;
+                }
             }
         }
     }
