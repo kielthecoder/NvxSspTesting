@@ -49,15 +49,50 @@ namespace NvxSspTesting
             {
                 var nvxDevice = dev as DmNvx350;
 
-                CrestronConsole.PrintLine("{0} is ONLINE", nvxDevice.EndpointName);
+                CrestronConsole.PrintLine("\"{0}\" is ONLINE", nvxDevice.Network.HostNameFeedback.StringValue);
 
-                switch (nvxDevice.Control.DeviceMode)
+                switch (nvxDevice.Control.DeviceModeFeedback)
                 {
                     case eDeviceMode.Transmitter:
                         CrestronConsole.PrintLine("  device is TRANSMITTER");
+                        CrestronConsole.PrintLine("  Stream address is {0}", nvxDevice.Control.ServerUrlFeedback.StringValue);
+
+                        switch (nvxDevice.Control.VideoSourceFeedback)
+                        {
+                            case eSfpVideoSourceTypes.Disable:
+                                CrestronConsole.PrintLine("  Video source is DISABLED");
+                                break;
+                            case eSfpVideoSourceTypes.Hdmi1:
+                                CrestronConsole.PrintLine("  Video source is HDMI1");
+                                break;
+                            case eSfpVideoSourceTypes.Hdmi2:
+                                CrestronConsole.PrintLine("  Video source is HDMI2");
+                                break;
+                            case eSfpVideoSourceTypes.Stream:
+                                CrestronConsole.PrintLine("  Video source is STREAM");
+                                break;
+                        }
+
                         break;
                     case eDeviceMode.Receiver:
                         CrestronConsole.PrintLine("  device is RECEIVER");
+
+                        switch (nvxDevice.Control.VideoSourceFeedback)
+                        {
+                            case eSfpVideoSourceTypes.Disable:
+                                CrestronConsole.PrintLine("  Video source is DISABLED");
+                                break;
+                            case eSfpVideoSourceTypes.Hdmi1:
+                                CrestronConsole.PrintLine("  Video source is HDMI1");
+                                break;
+                            case eSfpVideoSourceTypes.Hdmi2:
+                                CrestronConsole.PrintLine("  Video source is HDMI2");
+                                break;
+                            case eSfpVideoSourceTypes.Stream:
+                                CrestronConsole.PrintLine("  Video source is STREAM");
+                                break;
+                        }
+
                         break;
                 }
             }
